@@ -1,4 +1,4 @@
-import { CreateFeedbackDTO, FeedBack } from "../types/feedback";
+import { CreateFeedbackDTO, FeedBack, UpdateFeedbackDTO } from "../types/feedback";
 
 
 const feedBacks: FeedBack[] = [];
@@ -14,14 +14,11 @@ export const feedbackService ={
    list(): FeedBack[] {
     return feedBacks
    },
-   getById(id: number): FeedBack | null {
+   getById(id: number): FeedBack | undefined {
     const feedback = feedBacks.find((f) => f.id === id);
-    if (!feedback) {
-        return null;
-    }
     return feedback;
    },
-   update(id: number, dto: Partial<CreateFeedbackDTO>): FeedBack | null {
+   update(id: number, dto: UpdateFeedbackDTO): FeedBack | null {
     const feedback = feedBacks.find((f) => f.id === id);
     if (!feedback) {
         return null;
@@ -31,13 +28,13 @@ export const feedbackService ={
     feedBacks[index] = updatedFeedback;
     return updatedFeedback;
    },
-   delete(id: number): number{
+   delete(id: number): boolean{
     const feedback = feedBacks.find((f) => f.id === id);
     if (!feedback){
-        return -1;
+        return false;
     }
     const index = feedBacks.indexOf(feedback);
     feedBacks.splice(index, 1);
-    return 1;
+    return true;
    }
 }

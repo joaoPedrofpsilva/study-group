@@ -15,8 +15,8 @@ export const listFeedback = (_req: Request, res: Response) :void =>{
   res.json(feedbackService.list())
 }
 
-export const listFeedbackById = (req: Request<{ id: string }>, res: Response): void => {
-  const id: number = parseInt(req.params.id, 10);
+export const listFeedbackById = (req: Request, res: Response): void => {
+  const id: number = Number(req.params.id);
   const feedback = feedbackService.getById(id);
   if(!feedback){
     res.status(404).json({ message: "Feedback not found" });
@@ -25,8 +25,8 @@ export const listFeedbackById = (req: Request<{ id: string }>, res: Response): v
   res.status(200).json(feedback);
 }
 
-export const update = (req: Request<{ id: string }>, res: Response): void => {
-  const id: number = parseInt(req.params.id, 10);
+export const update = (req: Request, res: Response): void => {
+  const id: number = Number(req.params.id);
   const feedback = feedbackService.update(id, req.body);
   if (!feedback) {
     res.status(404).json({ message: "Feedback not found" });
@@ -35,10 +35,10 @@ export const update = (req: Request<{ id: string }>, res: Response): void => {
   res.status(200).json(feedback);
 }
 
-export const deleteFeedback = (req: Request<{ id: string }>, res: Response): void => {
-  const id: number = parseInt(req.params.id, 10);
+export const deleteFeedback = (req: Request, res: Response): void => {
+  const id: number = Number(req.params.id);
   const success = feedbackService.delete(id);
-  if (success === -1) {
+  if (!success) {
     res.status(404).json({ message: "Feedback not found" });
     return;
   }
