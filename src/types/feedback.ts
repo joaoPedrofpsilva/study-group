@@ -5,3 +5,4 @@ export interface FeedBack {
   nota: number;
 }
 export type CreateFeedbackDTO = Omit<FeedBack, "id">;
+export type UpdateFeedbackDTO = Partial<Omit<CreateFeedbackDTO, "autor">>;
