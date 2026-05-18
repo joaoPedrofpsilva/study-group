@@ -1,8 +1,7 @@
-export interface FeedBack {
+export interface Feedback {
   id: number;
   autor: string;
-  message: string;
+  mensagem: string;
   nota: number;
 }
-export type CreateFeedbackDTO = Omit<FeedBack, "id">;
-export type UpdateFeedbackDTO = Partial<Omit<CreateFeedbackDTO, "autor">>;
+export type CreateFeedbackDTO = Omit<Feedback, "id">;
