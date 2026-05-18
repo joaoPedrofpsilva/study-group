@@ -14,3 +14,15 @@ datasource db {
 }
 
 
+model Feedback {
+  id       Int    @id @default(autoincrement())
+  autor    String
+  mensagem String
+  nota     Int
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  email String @unique
+  senha String
+}
